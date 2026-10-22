@@ -1,0 +1,57 @@
+variables:
+  buildConfiguration: 'Release'
+  projectPath: '$(Build.SourcesDirectory)/API/API.csproj'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+name: $(TeamProject)_$(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
+
+steps:
+
+- checkout: self
+
+# Use .NET 10 SDK
+- task: UseDotNet@2
+  displayName: 'Use .NET 10 SDK'
+  inputs:
+    packageType: 'sdk'
+    version: '10.0.x'
+
+# Restore
+- task: DotNetCoreCLI@2
+  displayName: 'Restore'
+  inputs:
+    command: 'restore'
+    projects: '$(projectPath)'
+
+# Publish Platform API
+- task: DotNetCoreCLI@2
+  displayName: 'Publish Platform API'
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    projects: '$(projectPath)'
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/publish'
+    zipAfterPublish: false
+    modifyOutputPath: false
+
+# Create API.zip for Release Pipeline
+- task: ArchiveFiles@2
+  displayName: 'Create API.zip'
+  inputs:
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/publish'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/API.zip'
+    replaceExistingArchive: true
+
+- script: echo '$(Build.BuildNumber)'
+  displayName: 'Build Number'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish artifacts'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/API.zip'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'

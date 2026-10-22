@@ -1,0 +1,28 @@
+root = true
+
+[*.cs]
+dotnet_diagnostic.ASP0025.severity = none
+dotnet_diagnostic.CA1873.severity = none
+dotnet_diagnostic.CA2254.severity = none
+dotnet_diagnostic.IDE0301.severity = none
+dotnet_diagnostic.CA1050.severity = none
+dotnet_diagnostic.CS0618.severity = none
+dotnet_diagnostic.IDE0290.severity = none
+dotnet_diagnostic.CA1510.severity = none
+dotnet_diagnostic.IDE0074.severity = none
+dotnet_diagnostic.CA1862.severity = none
+dotnet_diagnostic.IDE0270.severity = none
+
+
+
+
+
+
+
+
+
+
+
+
+
+

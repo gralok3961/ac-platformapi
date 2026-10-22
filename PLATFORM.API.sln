@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{FF9BB062-F289-4F49-800C-B678514C09AF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{478CE4FB-0AF6-48E7-81CE-5A119A78A6E8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{4D510F35-1794-4A3F-B27B-5CBF212082AA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base", "Base\Base.csproj", "{55576C9B-3914-4153-8D56-9B52BB615BDC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FF9BB062-F289-4F49-800C-B678514C09AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF9BB062-F289-4F49-800C-B678514C09AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF9BB062-F289-4F49-800C-B678514C09AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF9BB062-F289-4F49-800C-B678514C09AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{478CE4FB-0AF6-48E7-81CE-5A119A78A6E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{478CE4FB-0AF6-48E7-81CE-5A119A78A6E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{478CE4FB-0AF6-48E7-81CE-5A119A78A6E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{478CE4FB-0AF6-48E7-81CE-5A119A78A6E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D510F35-1794-4A3F-B27B-5CBF212082AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D510F35-1794-4A3F-B27B-5CBF212082AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D510F35-1794-4A3F-B27B-5CBF212082AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D510F35-1794-4A3F-B27B-5CBF212082AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55576C9B-3914-4153-8D56-9B52BB615BDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55576C9B-3914-4153-8D56-9B52BB615BDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55576C9B-3914-4153-8D56-9B52BB615BDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55576C9B-3914-4153-8D56-9B52BB615BDC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8DF160E8-A723-41B5-AAD2-562B8861C7E2}
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.DotNetNamingPolicy = $1
+		$1.DirectoryNamespaceAssociation = PrefixedHierarchical
+		$0.TextStylePolicy = $7
+		$2.inheritsSet = null
+		$2.scope = text/x-csharp
+		$0.CSharpFormattingPolicy = $3
+		$3.scope = text/x-csharp
+		$4.inheritsSet = null
+		$4.scope = text/x-web
+		$5.inheritsSet = null
+		$5.scope = text/x-vs
+		$6.inheritsSet = null
+		$6.scope = text/x-html
+		$7.inheritsSet = null
+		$7.scope = text/x-sql
+		$0.StandardHeader = $8
+	EndGlobalSection
+EndGlobal
