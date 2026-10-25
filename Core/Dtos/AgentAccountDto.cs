@@ -171,6 +171,41 @@ namespace Core.Dtos
         public string? Issuer { get; set; }
         public string PerTransactionLimit { get; set; } = string.Empty;
     }
+    public class AgentAccountRevocationContextRequestDto
+    {
+        public Guid AppInstallationId { get; set; }
+        public int ChainId { get; set; }
+        public string PublicAddress { get; set; } = string.Empty;
+        public string DelegatedAuthorityIdentifier { get; set; } = string.Empty;
+        public Guid? AgentAccountId { get; set; }
+        public Guid? SigningAuthorityId { get; set; }
+    }
+
+    public class AgentAccountRevocationContextResponseDto
+    {
+        public Guid AgentAccountId { get; set; }
+        public Guid SigningAuthorityId { get; set; }
+        public Guid AppInstallationId { get; set; }
+        public int ChainId { get; set; }
+        public string PublicAddress { get; set; } = string.Empty;
+        public string DelegatedAuthorityIdentifier { get; set; } = string.Empty;
+        public AgentSigningAuthorityStatus SigningAuthorityStatus { get; set; }
+        public bool IsRevoked { get; set; }
+    }
+
+    public class CompleteAgentAccountRevocationRequestDto : AgentAccountRevocationContextRequestDto
+    {
+        public string TxHash { get; set; } = string.Empty;
+        public long LedgerIndex { get; set; }
+    }
+
+    public class RevokeAgentAccountResponseDto
+    {
+        public Guid AgentAccountId { get; set; }
+        public Guid SigningAuthorityId { get; set; }
+        public string TxHash { get; set; } = string.Empty;
+        public long LedgerIndex { get; set; }
+    }
 }
 
 

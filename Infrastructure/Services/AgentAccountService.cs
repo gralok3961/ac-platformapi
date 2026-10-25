@@ -27,6 +27,43 @@ namespace Infrastructure.Services
         private readonly IRequestNonceRepository _requestNonceRepository = requestNonceRepository;
         private readonly IInfoFeedHttpService _infoFeedHttpService = infoFeedHttpService;
 
+        public async Task<ResponseDto<AgentAccountRevocationContextResponseDto>> GetAgentAccountRevocationContextAsync(
+            AgentAccountRevocationContextRequestDto request, CancellationToken cancellationToken)
+        {
+            if (request.AppInstallationId == Guid.Empty || request.ChainId != 1 ||
+                string.IsNullOrWhiteSpace(request.PublicAddress) || string.IsNullOrWhiteSpace(request.DelegatedAuthorityIdentifier))
+                return new(HttpStatusCode.BadRequest, "Invalid Agent Account revocation context.");
+
+            var context = await _agentAccountRepository.GetRevocationContextAsync(request, cancellationToken);
+            return context == null
+                ? new(HttpStatusCode.NotFound, "Agent signing authority is unavailable for revocation.")
+                : new(context);
+        }
+
+        public async Task<ResponseDto<RevokeAgentAccountResponseDto>> RevokeAgentAccountAsync(
+            CompleteAgentAccountRevocationRequestDto request, CancellationToken cancellationToken)
+        {
+            if (!request.AgentAccountId.HasValue || request.AgentAccountId == Guid.Empty ||
+                !request.SigningAuthorityId.HasValue || request.SigningAuthorityId == Guid.Empty ||
+                request.LedgerIndex <= 0 || string.IsNullOrWhiteSpace(request.TxHash) || request.TxHash.Length != 64 || !request.TxHash.All(Uri.IsHexDigit))
+                return new(HttpStatusCode.BadRequest, "Invalid verified revocation transaction.");
+
+            var context = await GetAgentAccountRevocationContextAsync(request, cancellationToken);
+            if (context.Data == null) return new(context.StatusCode, context.Message);
+
+            // Only the authenticated Transaction API calls this after verifying the ledger transaction and removal.
+            if (!await _agentAccountRepository.RevokeAsync(request, DateTimeOffset.UtcNow, cancellationToken))
+                return new(HttpStatusCode.Conflict, "Agent revocation context has changed.");
+
+            return new(new RevokeAgentAccountResponseDto
+            {
+                AgentAccountId = request.AgentAccountId.Value,
+                SigningAuthorityId = request.SigningAuthorityId.Value,
+                TxHash = request.TxHash,
+                LedgerIndex = request.LedgerIndex
+            });
+        }
+
         public async Task<ResponseDto<IssueAgentAccountChallengeResponseDto>> IssueAgentAccountChallengeAsync(
                 IssueAgentAccountChallengeRequestDto request, CancellationToken cancellationToken)
         {

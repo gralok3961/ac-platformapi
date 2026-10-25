@@ -2,6 +2,9 @@ namespace Core.Interfaces.Services
 {
     public interface IAgentAccountService
     {
+        Task<ResponseDto<AgentAccountRevocationContextResponseDto>> GetAgentAccountRevocationContextAsync(AgentAccountRevocationContextRequestDto request, CancellationToken cancellationToken);
+        Task<ResponseDto<RevokeAgentAccountResponseDto>> RevokeAgentAccountAsync(CompleteAgentAccountRevocationRequestDto request, CancellationToken cancellationToken);
+
         //ACCOUNT
         Task<ResponseDto<IssueAgentAccountChallengeResponseDto>> IssueAgentAccountChallengeAsync(IssueAgentAccountChallengeRequestDto request, CancellationToken cancellationToken);
         Task<ResponseDto<AgentAccountChallengeDetailResponseDto>> GetAgentAccountChallengeByChallengeIdAsync(string challengeId, CancellationToken cancellationToken);

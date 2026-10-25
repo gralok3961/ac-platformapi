@@ -5,6 +5,8 @@ namespace Core.Interfaces.Repositories
         Task<AgentAccount> AddOrGetExistingAsync(AgentAccount agentAccount, CancellationToken cancellationToken);
         Task<AgentAccount?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
         Task<AgentAccount?> GetByChainIdAndPublicAddressAsync(int chainId, string publicAddress, CancellationToken cancellationToken);
+        Task<AgentAccountRevocationContextResponseDto?> GetRevocationContextAsync(AgentAccountRevocationContextRequestDto request, CancellationToken cancellationToken);
+        Task<bool> RevokeAsync(CompleteAgentAccountRevocationRequestDto request, DateTimeOffset now, CancellationToken cancellationToken);
         Task SaveChangesAsync(CancellationToken cancellationToken);
 
 

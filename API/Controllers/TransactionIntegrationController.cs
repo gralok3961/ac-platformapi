@@ -5,6 +5,26 @@ namespace API.Controllers
     public class TransactionIntegrationController(IAgentAccountService agentAccountService) : BaseApiController
     {
         private readonly IAgentAccountService _agentAccountService = agentAccountService;
+        [HttpPost("agent-account/revocation-context/a")]
+        public async Task<IActionResult> GetAgentAccountRevocationContext(
+            [FromBody] AgentAccountRevocationContextRequestDto request, CancellationToken cancellationToken)
+        {
+            var result = await _agentAccountService.GetAgentAccountRevocationContextAsync(request, cancellationToken);
+            if (result.Data == null)
+                return StatusCode((int)result.StatusCode, new ApiResponse(result.StatusCode, result.Message));
+            return Ok(result.Data);
+        }
+
+        [HttpPost("agent-account/revoke/a")]
+        public async Task<IActionResult> RevokeAgentAccount(
+            [FromBody] CompleteAgentAccountRevocationRequestDto request, CancellationToken cancellationToken)
+        {
+            var result = await _agentAccountService.RevokeAgentAccountAsync(request, cancellationToken);
+            if (result.Data == null)
+                return StatusCode((int)result.StatusCode, new ApiResponse(result.StatusCode, result.Message));
+            return Ok(result.Data);
+        }
+
         //***** Agent related *************
         [HttpPost]
         [Route("agent-account/challenge/a")]
